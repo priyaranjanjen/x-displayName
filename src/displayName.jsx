@@ -12,12 +12,8 @@ export default function Display(){
     // Inside handleSubmit function
     const handleSubmit = (e) => {
         e.preventDefault();
-            
+
         setFullName(`${formData.firstName} ${formData.lastName}`);
-        setFormData({
-            firstName: "",
-            lastName: ""
-        });
     };
 
 
