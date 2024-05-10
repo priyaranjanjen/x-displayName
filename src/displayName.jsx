@@ -8,14 +8,17 @@ export default function Display(){
     });
 
     const [fullName, setFullName] = useState('')
+    const [click, setClick] = useState(false);
 
     const handleSubmit = (e) =>{
+        setClick(true);
         e.preventDefault();
         setFullName(`${formData.firstName} ${formData.lastName}`)
         setFormData({
             firstName: "",
             lastName: ""
         })
+        // setClick(false)
     }
 
     return(
@@ -53,11 +56,13 @@ export default function Display(){
                 <button type="submit">Submit</button>
             </form>
         </div>
-        <div>
-            <p>Full Name: {fullName}</p>
-
-        </div>
-       
+        {
+            click && (
+                <div>
+                    <p>Full Name: {fullName}</p>
+                </div>
+            )
+        }          
         </>
 
     )
