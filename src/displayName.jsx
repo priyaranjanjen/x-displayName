@@ -10,16 +10,28 @@ export default function Display(){
     const [fullName, setFullName] = useState('')
     const [click, setClick] = useState(false);
 
-    const handleSubmit = (e) =>{
-        setClick(true);
+    // Function to validate input fields
+    const isValidInput = (input) => {
+        // Regular expression to allow only alphabets and spaces
+        const regex = /^[a-zA-Z\s]*$/;
+        return regex.test(input);
+    };
+
+    // Inside handleSubmit function
+    const handleSubmit = (e) => {
         e.preventDefault();
-        setFullName(`${formData.firstName} ${formData.lastName}`)
+        if (!isValidInput(formData.firstName) || !isValidInput(formData.lastName)) {
+            alert("Please enter valid names without special characters or numbers.");
+            return;
+        }
+        setClick(true);
+        setFullName(`${formData.firstName} ${formData.lastName}`);
         setFormData({
             firstName: "",
             lastName: ""
-        })
-        // setClick(false)
-    }
+        });
+    };
+
 
     return(
         <>
