@@ -1,59 +1,45 @@
 import { useState } from "react";
 
+function Display() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [fullName, setFullName] = useState("");
 
-export default function Display(){
-    const [formData, setFormData] = useState({
-        firstName: "",
-        lastName: ""
-    });
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent the form from submitting and refreshing the page
+    const full = `${firstName} ${lastName}`;
+    setFullName(full);
+  };
 
-    const [fullName, setFullName] = useState('')
-
-    // Inside handleSubmit function
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        setFullName(`${formData.firstName} ${formData.lastName}`);
-    };
-
-
-    return(
-        <>
-        <h1>Full Name Display</h1>
-        <div className="form">
-            <form onSubmit={handleSubmit}>
-                <label>First Name: </label>
-                <input required 
-                    type="text" 
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={(e)=>{
-                        setFormData({
-                            ...formData,
-                            firstName: e.target.value
-                        })
-                    }}
-                    />
-                <br/>
-                <br />
-                <label>Last Name: </label>
-                <input required
-                    type="text" 
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={(e)=>{
-                        setFormData({
-                            ...formData,
-                            lastName: e.target.value
-                        })
-                    }} />
-                <br/>
-                <br />
-                <button type="submit">Submit</button>
-                {fullName && <p>Full Name: {fullName}</p> }
-            </form>
-        </div>        
-        </>
-
-    )
+  return (
+    <div>
+      <h1>Full Name Display</h1>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>First Name:</label>
+          <input
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Last Name:</label>
+          <input
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+      {fullName && <p>Full Name: {fullName}</p>}
+    </div>
+  );
 }
+
+export default Display;
